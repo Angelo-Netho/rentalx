@@ -1,4 +1,4 @@
-import { Category } from "../model/Category";
+import {Category} from "../model/Category";
 
 interface ICreateCategoryDTO {
   name: string;
@@ -27,6 +27,10 @@ class CategoriesRepository {
   
   list(): Category[] {
     return this.categories;
+  }
+  
+  findByName(name: string): Category {
+    return this.categories.find((category) => category.name === name);
   }
 
 }
