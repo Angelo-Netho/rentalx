@@ -1,7 +1,19 @@
+import fs from "fs";
+import {parse as csvParse} from "csv-parse";
+
 class ImportCategoryUseCase {
   
-  execute(file: any) {
-    console.log(file)
+  execute(file: Express.Multer.File): void {
+    
+    const stream = fs.createReadStream(file.path);
+    
+    const parseFile = csvParse();
+    
+    stream.pipe(parseFile);
+    
+    parseFile.on("data", async (line: any) => {
+      console.log(line);
+    })
   }
   
 }
